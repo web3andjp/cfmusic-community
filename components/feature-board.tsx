@@ -2,10 +2,11 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Clock3, ListMusic, Rocket } from "lucide-react";
 
 type Feature = {
   id: string;
@@ -19,6 +20,7 @@ type RoadmapItem = {
   description: string;
   status: "planned" | "building" | "shipped";
   eta?: string;
+  icon: ReactNode;
 };
 
 const roadmapColors: Record<
@@ -52,6 +54,7 @@ const roadmap: RoadmapItem[] = [
       "Core listening, adaptive streaming, lightweight offline caching, early discovery, and feedback loops.",
     status: "building",
     eta: "March",
+    icon: <Rocket className="w-6 h-6" />,
   },
   {
     title: "🎶 Community Playlists",
@@ -59,12 +62,14 @@ const roadmap: RoadmapItem[] = [
       "Curated around events, regions, moods, and causes with follow/save and playlist metadata.",
     status: "planned",
     eta: "Q2",
+    icon: <ListMusic className="w-6 h-6" />,
   },
   {
     title: "Upcoming Items",
     description: "More roadmap items coming soon as we grow the platform with community input.",
     status: "planned",
     eta: "Rolling",
+    icon: <Clock3 className="w-6 h-6" />,
   },
 ];
 
@@ -178,12 +183,15 @@ export function FeatureBoard() {
                     className="flex-1 flex flex-col items-center text-center gap-3 pt-2"
                   >
                     <div
-                      className={`w-20 h-20 rounded-full border-2 flex items-center justify-center text-sm font-semibold uppercase tracking-wide ${colors.ring}`}
+                      className={`w-20 h-20 rounded-full border-2 flex items-center justify-center text-sm font-semibold uppercase tracking-wide relative ${colors.ring}`}
                     >
-                      {item.status}
+                      <span className="text-white">{item.icon}</span>
+                      <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-2 py-1 rounded-full text-[10px] border border-white/20 bg-black/30 uppercase tracking-wide text-white">
+                        {item.status}
+                      </span>
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                      <div className={`w-px flex-1 min-h-[60px] ${colors.stem}`} />
+                      <div className={`w-px flex-1 min-h-[76px] ${colors.stem}`} />
                       <div className={`w-3 h-3 rounded-full ${colors.dot}`} />
                     </div>
                     <div className="space-y-1">
