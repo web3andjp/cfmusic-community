@@ -1,14 +1,15 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import EmailProvider from "next-auth/providers/email";
-import type { AuthOptions } from "next-auth";
 import { prisma } from "@/lib/prisma";
+import { AuthOptions } from "next-auth";
+import EmailProvider from "next-auth/providers/email";
+import Resend from "next-auth/providers/resend";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    EmailProvider({
-      server: process.env.EMAIL_SERVER!,
-      from: process.env.EMAIL_FROM!,
+    Resend({
+      apiKey: process.env.RESEND_API_KEY!,
+      from: process.env.EMAIL_FROM!, // e.g. community@cfmusic.org
     }),
   ],
   session: {
@@ -16,5 +17,5 @@ export const authOptions: AuthOptions = {
   },
   pages: {
     signIn: "/auth/signin",
-  },
+  }
 };
