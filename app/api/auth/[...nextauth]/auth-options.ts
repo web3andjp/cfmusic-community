@@ -2,11 +2,13 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import type { AuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
 
   providers: [
+    // MAGIC LINK LOGIN
     EmailProvider({
       from: process.env.EMAIL_FROM!,
       sendVerificationRequest: async ({ identifier, url }) => {
@@ -26,6 +28,33 @@ export const authOptions: AuthOptions = {
         });
       },
     }),
+
+    // GUEST LOGIN (NO PASSWORD REQUIRED)
+    CredentialsProvider({
+      name: "Guest Login",
+      credentials: {},
+
+      async authorize() {
+        const email = "guest@cfmusic.org";
+
+        let user = await prisma.user.findUnique({
+          where: { email },
+        });
+
+        if (!user) {
+          user = await prisma.user.create({
+            data: {
+              email,
+              name: "Guest User",
+              image: null,
+              registered: false,
+            },
+          });
+        }
+
+        return user;
+      },
+    }),
   ],
 
   session: {
@@ -37,8 +66,21 @@ export const authOptions: AuthOptions = {
   },
 
   callbacks: {
-    async session({ session }) {
-      // No server changes needed — guest upgrade is handled client-side
+    // Attach data to the JWT
+    async jwt({ token, user }) {
+      if (user) {
+        token.email = user.email;
+        token.registered = user.registered ?? false;
+      }
+      return token;
+    },
+
+    // Expose it in the session
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.email = token.email as string;
+        session.user.registered = token.registered as boolean;
+      }
       return session;
     },
   },

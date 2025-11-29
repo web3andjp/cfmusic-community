@@ -8,81 +8,59 @@ import { Button } from "@/components/ui/button";
 export default function SignInPage() {
   const [email, setEmail] = useState("");
 
-  const handleMagicLink = () => {
+  const handleMagicLink = async () => {
     if (!email) return;
-    signIn("email", { email });
+
+    await signIn("email", {
+      email,
+      redirect: true,
+      callbackUrl: "/",
+    });
   };
 
-  const handleGuest = () => {
-    signIn("credentials", {
+  const handleGuest = async () => {
+    await signIn("credentials", {
       email: "guest@cfmusic.org",
+      password: "guest",
       redirect: true,
+      callbackUrl: "/",
     });
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0A0A0A] px-6">
-      <div className="w-full max-w-md bg-[#0A0A0A] space-y-8">
-        
-        {/* Header */}
-        <h1 className="text-4xl font-bold text-center text-white tracking-tight">
-          Sign In
-        </h1>
+    <div className="flex flex-col items-center justify-center h-[80vh] px-6 gap-6 text-white">
 
-        {/* Email Input */}
-        <div className="space-y-3">
-          <Input
-            type="email"
-            placeholder="Enter your email"
-            className="
-              w-full px-4 py-3
-              bg-[#111111] text-white 
-              placeholder-[#A2A2A2]
-              border border-[#2A2A2A]
-              rounded-xl
-              focus:border-[#D87800]
-              focus:ring-1 focus:ring-[#D87800]
-              transition
-            "
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+      <h1 className="text-4xl font-bold text-white mb-4">
+        Sign In
+      </h1>
 
-          {/* Magic Link Button */}
-          <Button
-            onClick={handleMagicLink}
-            className="
-              w-full py-3 text-lg font-semibold
-              bg-[#D87800] text-black
-              hover:bg-[#b86200]
-              rounded-xl
-              transition
-            "
-          >
-            Send Magic Link
-          </Button>
-        </div>
+      {/* Email input */}
+      <Input
+        type="email"
+        placeholder="Enter your email"
+        className="max-w-md w-full text-black bg-white rounded-md px-4 py-3 text-lg"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        {/* OR Divider */}
-        <div className="flex items-center justify-center py-2">
-          <span className="text-[#A2A2A2] text-sm">or</span>
-        </div>
+      <Button
+        onClick={handleMagicLink}
+        className="bg-[#D87800] hover:bg-[#b96500] text-white text-lg font-semibold max-w-md w-full py-3"
+      >
+        Send Magic Link
+      </Button>
 
-        {/* Guest Button */}
-        <Button
-          onClick={handleGuest}
-          className="
-            w-full py-3 text-lg font-semibold
-            bg-white/5 text-white
-            border border-white/20
-            hover:bg-white/10
-            rounded-xl
-            transition
-          "
-        >
-          Continue as Guest
-        </Button>
-      </div>
+      <div className="text-gray-400">or</div>
+
+      {/* CONTINUE AS GUEST */}
+      <Button
+        variant="outline"
+        onClick={handleGuest}
+        className="border border-white text-white hover:bg-white/10 max-w-md w-full py-3 text-lg font-semibold"
+      >
+        Continue as Guest
+      </Button>
+
     </div>
   );
 }
