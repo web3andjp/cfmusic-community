@@ -1,41 +1,40 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "@/lib/prisma";
-import type { AuthOptions } from "next-auth";
-import EmailProvider from "next-auth/providers/email";
+"use client";
 
-export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma),
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-  providers: [
-    EmailProvider({
-      from: process.env.EMAIL_FROM!,
+export default function SignInPage() {
+  const [email, setEmail] = useState("");
 
-      sendVerificationRequest: async ({ identifier, url }) => {
-        // ⛔ DO NOT import Resend at the top-level
-        // ✅ SAFE: dynamic import inside the function
-        const { Resend } = await import("resend");
-        const resend = new Resend(process.env.RESEND_API_KEY!);
+  const handleSignIn = () => {
+    if (!email) return;
+    signIn("email", { email });
+  };
 
-        await resend.emails.send({
-          from: process.env.EMAIL_FROM!,
-          to: identifier,
-          subject: "Your Campfire login link",
-          html: `
-            <div style="font-family: sans-serif; font-size: 16px;">
-              <p>Click the link below to sign in:</p>
-              <p><a href="${url}">Sign in to Campfire</a></p>
-            </div>
-          `,
-        });
-      },
-    }),
-  ],
+  return (
+    <div className="flex flex-col items-center justify-center h-[80vh] text-white gap-4">
+      <h1 className="text-3xl font-bold">Sign In</h1>
 
-  session: {
-    strategy: "jwt",
-  },
+      <Input
+        type="email"
+        placeholder="Enter your email"
+        className="text-black max-w-sm w-full"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-  pages: {
-    signIn: "/auth/signin",
-  },
-};
+      <Button className="bg-amber-600 text-white" onClick={handleSignIn}>
+        Send Magic Link
+      </Button>
+
+      <Button
+        className="bg-gray-600 text-white"
+        onClick={() => signIn("dev")}
+      >
+        Dev Login (Temporary)
+      </Button>
+    </div>
+  );
+}

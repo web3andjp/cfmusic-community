@@ -10,7 +10,8 @@ export default function SignInPage() {
 
   const handleSignIn = () => {
     if (!email) return;
-    signIn("resend", { email });
+    // IMPORTANT: Provider id must be "email", not "resend"
+    signIn("email", { email });
   };
 
   return (
