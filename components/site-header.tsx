@@ -61,11 +61,8 @@ export function SiteHeader() {
           <a href="/#platform-roadmap" className="hover:text-white transition">
             Platform roadmap
           </a>
-          <a href="/#dashboard" className="hover:text-white transition">
-            Feature list
-          </a>
           <a href="/feature-request" className="hover:text-white transition">
-            Submit a feature
+            Feature Requests
           </a>
         </nav>
 
