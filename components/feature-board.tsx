@@ -6,7 +6,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Clock3, ListMusic, Rocket } from "lucide-react";
+import { Clock3, Layers, Sparkles } from "lucide-react";
 
 type Feature = {
   id: string;
@@ -49,20 +49,20 @@ const roadmapColors: Record<
 
 const roadmap: RoadmapItem[] = [
   {
-    title: "🚀 Beta Platform Launch",
+    title: "Beta Platform Launch",
     description:
-      "Core listening, adaptive streaming, lightweight offline caching, early discovery, and feedback loops.",
+      "The beta introduces foundational listening, adaptive streaming, lightweight offline caching, early discovery, and a framework for listener + artist feedback.",
     status: "building",
     eta: "March",
-    icon: <Rocket className="w-6 h-6" />,
+    icon: <Sparkles className="w-6 h-6" />,
   },
   {
-    title: "🎶 Community Playlists",
+    title: "Community Playlists",
     description:
-      "Curated around events, regions, moods, and causes with follow/save and playlist metadata.",
+      "Curated for events, regions, moods, and causes with follow/save, playlist metadata (theme, curator, region), and simple discovery.",
     status: "planned",
     eta: "Q2",
-    icon: <ListMusic className="w-6 h-6" />,
+    icon: <Layers className="w-6 h-6" />,
   },
   {
     title: "Upcoming Items",
