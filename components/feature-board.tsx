@@ -79,20 +79,6 @@ export function FeatureBoard() {
               Campfire is redefining streaming as a community-powered public good — a place where
               artists thrive, fans belong, and everyone participates in a fairer music ecosystem.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-amber-500"
-              >
-                ◆ Register / Sign Up
-              </a>
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 rounded-md border border-white/30 px-4 py-2 text-sm font-semibold text-white/90 transition hover:border-white/60 hover:text-white"
-              >
-                ◆ Support the Movement
-              </a>
-            </div>
           </div>
 
           <div className="flex items-center justify-between flex-wrap gap-3">
@@ -147,7 +133,22 @@ export function FeatureBoard() {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-white/10 bg-gradient-to-r from-amber-800/40 via-amber-700/30 to-amber-500/25 p-6 shadow-xl">
+      <div className="flex flex-wrap gap-3 justify-center">
+        <a
+          href="#"
+          className="inline-flex items-center justify-center rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-amber-500"
+        >
+          Register / Sign Up
+        </a>
+        <a
+          href="#"
+          className="inline-flex items-center justify-center rounded-md border border-white/30 px-4 py-2 text-sm font-semibold text-white/90 transition hover:border-white/60 hover:text-white"
+        >
+          Support the Movement
+        </a>
+      </div>
+
+      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen rounded-2xl border border-white/10 bg-gradient-to-r from-amber-800/40 via-amber-700/30 to-amber-500/25 p-6 shadow-xl">
         <p className="text-sm uppercase tracking-[0.2em] text-white/70 mb-2">
           Community roadmap
         </p>
