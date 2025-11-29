@@ -257,7 +257,9 @@ export function FeatureBoard() {
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-white/60">Feature Requests</p>
-            <h2 className="text-xl font-semibold mt-1">Your votes decide what we build next</h2>
+            <h2 className="text-xl font-semibold mt-1">
+              Help us improve Campfire by suggesting features and enhancements.
+            </h2>
           </div>
           <span className="text-sm text-white/70">
             {features.length} ideas • {features.reduce((sum, f) => sum + f.votes, 0)} total votes
