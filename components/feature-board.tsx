@@ -23,25 +23,25 @@ type RoadmapItem = {
 
 const roadmap: RoadmapItem[] = [
   {
-    title: "Interactive Setlists",
-    description: "Collaborative set builder with live key and BPM suggestions for worship teams.",
+    title: "Mobile-first listening",
+    description: "Stream the catalog with lightweight offline caching and low-data modes.",
     status: "building",
     eta: "March",
   },
   {
-    title: "Volunteer Portal",
-    description: "Self-serve onboarding, music assignments, and rehearsal reminders in one place.",
+    title: "Donor-friendly playback links",
+    description: "Shareable listening links that surface project impact and donation calls-to-action.",
     status: "planned",
     eta: "Q2",
   },
   {
-    title: "Audio Notes",
-    description: "Upload, time-stamp, and share rehearsal clips directly on each song card.",
+    title: "Community playlists",
+    description: "Curated playlists for events, regions, and causes with simple follow and save.",
     status: "planned",
   },
   {
-    title: "Service Playback",
-    description: "Archive playback with chords overlay to help teams review Sunday sets.",
+    title: "Accessible audio player",
+    description: "Keyboard-first controls, captions/lyrics, and high-contrast theme baked into the player.",
     status: "shipped",
     eta: "Live",
   },
@@ -135,11 +135,11 @@ export function FeatureBoard() {
           Community roadmap
         </p>
         <h1 className="text-3xl md:text-4xl font-semibold leading-tight text-white mb-3">
-          Vote on what ships next. Build the playlist you want to lead with.
+          Vote on what ships next. Shape the future of this non-profit music platform.
         </h1>
         <p className="text-white/80 max-w-3xl">
-          Drop ideas, upvote priorities, and follow along as we move work across the product
-          roadmap. Every vote pulls the team’s focus where it matters most.
+          Drop ideas, upvote priorities, and follow along as we move work across the product roadmap.
+          Every vote keeps the platform aligned with listeners and artists in the mission.
         </p>
       </section>
 
