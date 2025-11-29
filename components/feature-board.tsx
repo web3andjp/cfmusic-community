@@ -130,42 +130,52 @@ export function FeatureBoard() {
 
   return (
     <div className="flex flex-col gap-8 mt-6">
-      {/* Product Roadmap (top of page) */}
-      <div className="border border-white/10 rounded-xl bg-white/5 p-5 shadow-lg">
-        <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-white/60">Product Roadmap</p>
-            <h2 className="text-xl font-semibold mt-1">Follow the build from idea to shipped</h2>
-          </div>
-          <span className="text-sm text-white/70">Updated weekly</span>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-4">
-          {roadmap.map((item) => (
-            <div
-              key={item.title}
-              className="border border-white/10 rounded-lg bg-black/30 p-4 flex flex-col gap-2 hover:border-amber-400/40 transition"
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-semibold">{item.title}</h3>
-                <span
-                  className={`text-xs px-2 py-1 rounded-full uppercase tracking-wide ${
-                    item.status === "shipped"
-                      ? "bg-emerald-500/20 text-emerald-200 border border-emerald-500/40"
-                      : item.status === "building"
-                      ? "bg-amber-500/20 text-amber-100 border border-amber-400/50"
-                      : "bg-white/10 text-white/70 border border-white/20"
-                  }`}
-                >
-                  {item.status}
-                </span>
-              </div>
-              <p className="text-white/70 text-sm">{item.description}</p>
-              {item.eta && <p className="text-xs text-white/50">ETA: {item.eta}</p>}
+      {/* Full-width Product Roadmap banner */}
+      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-gradient-to-r from-amber-900/80 via-amber-700/70 to-amber-600/60 border-y border-white/10 shadow-2xl">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 py-10 space-y-6">
+          <div className="flex items-center justify-between flex-wrap gap-3">
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-white/70">Product Roadmap</p>
+              <h2 className="text-3xl font-semibold mt-1 leading-tight text-white">
+                Where the platform is heading next
+              </h2>
+              <p className="text-white/80 mt-2 max-w-3xl">
+                Track the key bets for this non-profit streaming platform. Vote, comment, and watch
+                features move from planned to shipped.
+              </p>
             </div>
-          ))}
+            <span className="text-sm text-white/70 bg-black/20 px-3 py-1 rounded-full border border-white/15">
+              Updated weekly
+            </span>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {roadmap.map((item) => (
+              <div
+                key={item.title}
+                className="border border-white/10 rounded-lg bg-black/30 p-4 flex flex-col gap-2 hover:border-amber-400/40 transition"
+              >
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold">{item.title}</h3>
+                  <span
+                    className={`text-xs px-2 py-1 rounded-full uppercase tracking-wide ${
+                      item.status === "shipped"
+                        ? "bg-emerald-500/20 text-emerald-200 border border-emerald-500/40"
+                        : item.status === "building"
+                        ? "bg-amber-500/20 text-amber-100 border border-amber-400/50"
+                        : "bg-white/10 text-white/70 border border-white/20"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                </div>
+                <p className="text-white/70 text-sm">{item.description}</p>
+                {item.eta && <p className="text-xs text-white/50">ETA: {item.eta}</p>}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
       <section className="rounded-2xl border border-white/10 bg-gradient-to-r from-amber-800/40 via-amber-700/30 to-amber-500/25 p-6 shadow-xl">
         <p className="text-sm uppercase tracking-[0.2em] text-white/70 mb-2">
