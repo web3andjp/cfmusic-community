@@ -8,14 +8,17 @@ import { Button } from "@/components/ui/button";
 export default function SignInPage() {
   const [email, setEmail] = useState("");
 
-  const handleSignIn = () => {
+  const handleMagicLink = () => {
     if (!email) return;
-    // IMPORTANT: Provider id must be "email", not "resend"
     signIn("email", { email });
   };
 
+  const handleDevLogin = () => {
+    signIn("dev");
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center h-[80vh] text-white gap-4">
+    <div className="flex flex-col items-center justify-center h-[80vh] text-white gap-6">
       <h1 className="text-3xl font-bold">Sign In</h1>
 
       <Input
@@ -26,8 +29,13 @@ export default function SignInPage() {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <Button className="bg-amber-600 text-white" onClick={handleSignIn}>
+      <Button className="bg-amber-600 text-white w-full max-w-sm" onClick={handleMagicLink}>
         Send Magic Link
+      </Button>
+
+      {/* TEMP DEV LOGIN BUTTON */}
+      <Button className="bg-gray-600 text-white w-full max-w-sm" onClick={handleDevLogin}>
+        Dev Login (Temporary)
       </Button>
     </div>
   );

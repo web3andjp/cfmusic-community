@@ -1,40 +1,71 @@
-"use client";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "@/lib/prisma";
+import type { AuthOptions } from "next-auth";
+import EmailProvider from "next-auth/providers/email";
+import CredentialsProvider from "next-auth/providers/credentials";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+//
+// TEMP DEV LOGIN PROVIDER
+//
+const DevProvider = CredentialsProvider({
+  id: "dev",
+  name: "Dev Login",
+  credentials: {
+    pass: { label: "Dev Password", type: "password" }, // unused, but required
+  },
+  async authorize() {
+    const email = "dev@cfmusic.org";
 
-export default function SignInPage() {
-  const [email, setEmail] = useState("");
+    let user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      user = await prisma.user.create({
+        data: {
+          email,
+          name: "Dev User",
+        },
+      });
+    }
 
-  const handleSignIn = () => {
-    if (!email) return;
-    signIn("email", { email });
-  };
+    return user;
+  },
+});
 
-  return (
-    <div className="flex flex-col items-center justify-center h-[80vh] text-white gap-4">
-      <h1 className="text-3xl font-bold">Sign In</h1>
+export const authOptions: AuthOptions = {
+  adapter: PrismaAdapter(prisma),
 
-      <Input
-        type="email"
-        placeholder="Enter your email"
-        className="text-black max-w-sm w-full"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+  providers: [
+    // TEMP PROVIDER
+    DevProvider,
 
-      <Button className="bg-amber-600 text-white" onClick={handleSignIn}>
-        Send Magic Link
-      </Button>
+    //
+    // REAL EMAIL PROVIDER
+    //
+    EmailProvider({
+      from: process.env.EMAIL_FROM!,
+      sendVerificationRequest: async ({ identifier, url }) => {
+        const { Resend } = await import("resend");
+        const resend = new Resend(process.env.RESEND_API_KEY!);
 
-      <Button
-        className="bg-gray-600 text-white"
-        onClick={() => signIn("dev")}
-      >
-        Dev Login (Temporary)
-      </Button>
-    </div>
-  );
-}
+        await resend.emails.send({
+          from: process.env.EMAIL_FROM!,
+          to: identifier,
+          subject: "Your Campfire login link",
+          html: `
+            <div style="font-family: sans-serif; font-size: 16px;">
+              <p>Click the link below to sign in:</p>
+              <p><a href="${url}">Sign in to Campfire</a></p>
+            </div>
+          `,
+        });
+      },
+    }),
+  ],
+
+  session: {
+    strategy: "jwt",
+  },
+
+  pages: {
+    signIn: "/auth/signin",
+  },
+};
