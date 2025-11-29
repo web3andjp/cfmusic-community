@@ -51,7 +51,7 @@ const roadmap: RoadmapItem[] = [
   {
     title: "Beta Platform Launch",
     description:
-      "The beta introduces foundational listening, adaptive streaming, lightweight offline caching, early discovery, and a framework for listener + artist feedback.",
+      "Foundational listening launch with adaptive streaming, lightweight offline caching, early discovery, and feedback loops for listeners and artists.",
     status: "building",
     eta: "March",
     icon: <Sparkles className="w-6 h-6" />,
@@ -185,17 +185,19 @@ export function FeatureBoard() {
                     <div
                       className={`w-20 h-20 rounded-full border-2 flex items-center justify-center text-sm font-semibold uppercase tracking-wide relative ${colors.ring}`}
                     >
-                      <span className="text-white">{item.icon}</span>
-                      <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-2 py-1 rounded-full text-[10px] border border-white/20 bg-black/30 uppercase tracking-wide text-white">
-                        {item.status}
-                      </span>
+                      {item.status}
                     </div>
                     <div className="flex flex-col items-center gap-2">
                       <div className={`w-px flex-1 min-h-[76px] ${colors.stem}`} />
                       <div className={`w-3 h-3 rounded-full ${colors.dot}`} />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="font-semibold text-lg text-white">{item.title}</h3>
+                      <h3 className="font-semibold text-lg text-white flex items-center justify-center gap-2">
+                        <span className="inline-flex items-center justify-center rounded-md bg-white/10 border border-white/15 px-2 py-1 text-sm">
+                          {item.icon}
+                        </span>
+                        <span>{item.title}</span>
+                      </h3>
                       <p className={`text-sm ${colors.label}`}>{item.description}</p>
                       {item.eta && (
                         <p className="text-xs text-white/60">
