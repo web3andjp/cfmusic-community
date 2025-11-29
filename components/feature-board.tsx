@@ -159,20 +159,6 @@ export function FeatureBoard() {
       {/* Full-width Platform Roadmap banner */}
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-gradient-to-r from-amber-900/80 via-amber-700/70 to-amber-600/60 border-y border-white/10 shadow-2xl">
         <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 py-10 space-y-6">
-          <div className="flex items-center justify-between flex-wrap gap-3">
-            <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-white/70">Platform Roadmap</p>
-              <h2 className="text-3xl font-semibold mt-1 leading-tight text-white">
-                Where Campfire Music is heading next
-              </h2>
-              <p className="text-white/80 mt-2 max-w-3xl">
-                A transparent look at the core initiatives shaping our nonprofit, artist-first streaming
-                platform. Follow progress, vote on priorities, and watch features move from planned →
-                building → shipped.
-              </p>
-            </div>
-          </div>
-
           <div className="space-y-3">
             <h3 className="text-2xl md:text-3xl font-semibold text-white">
               The Future of Music Starts Here
@@ -194,6 +180,20 @@ export function FeatureBoard() {
               >
                 ◆ Support the Movement
               </a>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between flex-wrap gap-3">
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-white/70">Platform Roadmap</p>
+              <h2 className="text-3xl font-semibold mt-1 leading-tight text-white">
+                Where Campfire Music is heading next
+              </h2>
+              <p className="text-white/80 mt-2 max-w-3xl">
+                A transparent look at the core initiatives shaping our nonprofit, artist-first streaming
+                platform. Follow progress, vote on priorities, and watch features move from planned →
+                building → shipped.
+              </p>
             </div>
           </div>
 
