@@ -116,48 +116,6 @@ function FeatureRequestForm() {
         </p>
       </div>
 
-      {!isLoggedIn && (
-        <p className="text-red-400">
-          You must sign in or use “Continue as Guest” to submit ideas.
-        </p>
-      )}
-
-      <div className="p-5 border border-white/10 rounded-xl bg-white/5 shadow-lg">
-        <div className="space-y-3">
-          <Input
-            placeholder="Feature title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            disabled={!isLoggedIn || submitting}
-            className="text-black"
-          />
-
-          <Textarea
-            placeholder="Feature description (optional)"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            disabled={!isLoggedIn || submitting}
-            className="text-black"
-          />
-
-          <div className="flex items-center gap-3">
-            <Button
-              onClick={submitFeature}
-              disabled={!isLoggedIn || submitting}
-              className="bg-amber-600"
-            >
-              {submitting ? "Submitting..." : "Submit Feature"}
-            </Button>
-            <Button
-              onClick={() => router.push("/#dashboard")}
-              className="bg-transparent border border-white/40 text-white hover:bg-white/10"
-            >
-              Back to Dashboard
-            </Button>
-          </div>
-        </div>
-      </div>
-
       <div className="flex flex-col gap-4" id="dashboard">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -201,6 +159,48 @@ function FeatureRequestForm() {
             </div>
           );
         })}
+      </div>
+
+      {!isLoggedIn && (
+        <p className="text-red-400">
+          You must sign in or use “Continue as Guest” to submit ideas.
+        </p>
+      )}
+
+      <div className="p-5 border border-white/10 rounded-xl bg-white/5 shadow-lg">
+        <div className="space-y-3">
+          <Input
+            placeholder="Feature title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            disabled={!isLoggedIn || submitting}
+            className="text-black"
+          />
+
+          <Textarea
+            placeholder="Feature description (optional)"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            disabled={!isLoggedIn || submitting}
+            className="text-black"
+          />
+
+          <div className="flex items-center gap-3">
+            <Button
+              onClick={submitFeature}
+              disabled={!isLoggedIn || submitting}
+              className="bg-amber-600"
+            >
+              {submitting ? "Submitting..." : "Submit Feature"}
+            </Button>
+            <Button
+              onClick={() => router.push("/#dashboard")}
+              className="bg-transparent border border-white/40 text-white hover:bg-white/10"
+            >
+              Back to Dashboard
+            </Button>
+          </div>
+        </div>
       </div>
     </main>
   );
