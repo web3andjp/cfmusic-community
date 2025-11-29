@@ -1,18 +1,14 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/site-header";
 import { Providers } from "./providers";
+import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "Campfire Community Hub",
   description: "Suggest and vote on features for Campfire Music",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-[#0A0A0A] text-white">

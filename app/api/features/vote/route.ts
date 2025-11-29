@@ -4,30 +4,32 @@ import { authOptions } from "../../auth/[...nextauth]/auth-options";
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
+  const body = await req.json();
 
-  if (!session?.user?.email) {
+  let userId: string | null = null;
+
+  if (session?.user?.email) {
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+    userId = user?.id || null;
+  } else if (body.guestId) {
+    userId = `guest-${body.guestId}`;
+  } else {
     return new Response("Unauthorized", { status: 401 });
   }
-
-  const { featureId } = await req.json();
-
-  const user = await prisma.user.findUnique({
-    where: { email: session.user.email! },
-  });
-
-  if (!user) return new Response("User not found", { status: 404 });
 
   await prisma.featureVote.upsert({
     where: {
       userId_featureId: {
-        userId: user.id,
-        featureId,
+        userId,
+        featureId: body.featureId,
       },
     },
     update: {},
     create: {
-      userId: user.id,
-      featureId,
+      userId,
+      featureId: body.featureId,
     },
   });
 
