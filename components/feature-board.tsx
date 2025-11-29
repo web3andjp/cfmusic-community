@@ -1,17 +1,8 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Clock3, Layers, Sparkles } from "lucide-react";
-
-type Feature = {
-  id: string;
-  title: string;
-  description: string;
-  votes: number;
-};
 
 type RoadmapItem = {
   title: string;
@@ -72,59 +63,6 @@ const roadmap: RoadmapItem[] = [
 ];
 
 export function FeatureBoard() {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  const [features, setFeatures] = useState<Feature[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  // Guest Info
-  const [guestId, setGuestId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const g = localStorage.getItem("campfire-guest");
-    if (g) {
-      const parsed = JSON.parse(g);
-      setGuestId(parsed.guestId);
-    }
-  }, []);
-
-  // Load features from server
-  async function loadFeatures() {
-    setLoading(true);
-    const res = await fetch("/api/features");
-    const data = await res.json();
-    setFeatures(data);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    loadFeatures();
-  }, []);
-
-  async function vote(featureId: string) {
-    const res = await fetch("/api/features/vote", {
-      method: "POST",
-      body: JSON.stringify({
-        featureId,
-        guestId, // attaches guest id when no session
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (res.ok) {
-      await loadFeatures();
-      // Drop the user back on the dashboard view with fresh data.
-      router.push("/#dashboard");
-    } else {
-      alert("You must sign in or use guest mode.");
-    }
-  }
-
-  const isLoggedIn = !!session?.user?.email || !!guestId;
-
   return (
     <div className="flex flex-col gap-8 mt-6" id="hero">
       {/* Full-width Platform Roadmap banner */}
@@ -222,52 +160,6 @@ export function FeatureBoard() {
         </p>
       </section>
 
-      {/* Submit Feature */}
-      {/* Feature List */}
-      <div className="flex flex-col gap-4" id="dashboard">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-white/60">Feature Requests</p>
-            <h2 className="text-xl font-semibold mt-1">
-              Help us improve Campfire by suggesting features and enhancements.
-            </h2>
-          </div>
-          <span className="text-sm text-white/70">
-            {features.length} ideas • {features.reduce((sum, f) => sum + f.votes, 0)} total votes
-          </span>
-        </div>
-
-        {loading && <p className="text-white/60">Loading...</p>}
-
-        {features.map((f) => {
-          const disabled = !isLoggedIn;
-          return (
-            <div
-              key={f.id}
-              className="p-4 border border-white/10 rounded-lg bg-white/5 flex justify-between hover:border-amber-400/40 transition"
-            >
-              <div>
-                <h3 className="font-bold text-lg">{f.title}</h3>
-                <p className="text-white/70 text-sm mt-1">{f.description}</p>
-              </div>
-
-              <div className="flex flex-col items-center">
-                <span className="text-lg font-bold mb-1">{f.votes}</span>
-
-                <Button
-                  size="sm"
-                  onClick={() => vote(f.id)}
-                  disabled={disabled}
-                  className="bg-amber-600"
-                  title={disabled ? "You must be logged in to vote." : "Vote for this feature"}
-                >
-                  Vote
-                </Button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 }

@@ -8,6 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
+type Feature = {
+  id: string;
+  title: string;
+  description: string;
+  votes: number;
+};
+
 export default function FeatureRequestPage() {
   return (
     <Providers>
@@ -21,6 +28,8 @@ function FeatureRequestForm() {
   const router = useRouter();
 
   const [guestId, setGuestId] = useState<string | null>(null);
+  const [features, setFeatures] = useState<Feature[]>([]);
+  const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -34,6 +43,19 @@ function FeatureRequestForm() {
   }, []);
 
   const isLoggedIn = !!session?.user?.email || !!guestId;
+
+  // Load features from server
+  async function loadFeatures() {
+    setLoading(true);
+    const res = await fetch("/api/features");
+    const data = await res.json();
+    setFeatures(data);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    loadFeatures();
+  }, []);
 
   async function submitFeature() {
     if (!title.trim() || submitting) return;
@@ -56,7 +78,28 @@ function FeatureRequestForm() {
     if (res.ok) {
       setTitle("");
       setDescription("");
-      router.push("/#dashboard");
+      await loadFeatures();
+      router.push("/");
+    } else {
+      alert("You must sign in or use guest mode.");
+    }
+  }
+
+  async function vote(featureId: string) {
+    if (!isLoggedIn) return;
+    const res = await fetch("/api/features/vote", {
+      method: "POST",
+      body: JSON.stringify({
+        featureId,
+        guestId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (res.ok) {
+      await loadFeatures();
     } else {
       alert("You must sign in or use guest mode.");
     }
@@ -113,6 +156,51 @@ function FeatureRequestForm() {
             </Button>
           </div>
         </div>
+      </div>
+
+      <div className="flex flex-col gap-4" id="dashboard">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-white/60">Feature Requests</p>
+            <h2 className="text-xl font-semibold mt-1">
+              Help us improve Campfire by suggesting features and enhancements.
+            </h2>
+          </div>
+          <span className="text-sm text-white/70">
+            {features.length} ideas • {features.reduce((sum, f) => sum + f.votes, 0)} total votes
+          </span>
+        </div>
+
+        {loading && <p className="text-white/60">Loading...</p>}
+
+        {features.map((f) => {
+          const disabled = !isLoggedIn;
+          return (
+            <div
+              key={f.id}
+              className="p-4 border border-white/10 rounded-lg bg-white/5 flex justify-between hover:border-amber-400/40 transition"
+            >
+              <div>
+                <h3 className="font-bold text-lg">{f.title}</h3>
+                <p className="text-white/70 text-sm mt-1">{f.description}</p>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <span className="text-lg font-bold mb-1">{f.votes}</span>
+
+                <Button
+                  size="sm"
+                  onClick={() => vote(f.id)}
+                  disabled={disabled}
+                  className="bg-amber-600"
+                  title={disabled ? "You must be logged in to vote." : "Vote for this feature"}
+                >
+                  Vote
+                </Button>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </main>
   );
