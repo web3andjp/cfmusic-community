@@ -42,44 +42,71 @@ export function SiteHeader() {
   const email = session?.user?.email;
 
   return (
-    <header className="flex items-center justify-between p-4 border-b border-white/10">
-      <h1 className="text-xl font-bold text-white">Campfire Community Hub</h1>
-
-      {/* Logged-in user */}
-      {email && (
+    <header className="border-b border-white/10">
+      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-6">
         <div className="flex items-center gap-3">
-          <span className="text-white/80">{email}</span>
-          <Button
-            className="bg-transparent border border-white/40 text-white hover:bg-white/10 px-4 py-1"
-            onClick={() => signOut()}
-          >
-            Sign Out
-          </Button>
+          <div className="w-8 h-8 rounded-full bg-amber-500/80 border border-white/20" />
+          <div className="flex flex-col leading-tight">
+            <span className="text-xs uppercase tracking-[0.2em] text-white/60">
+              Campfire Music
+            </span>
+            <span className="text-lg font-semibold text-white">Community Hub</span>
+          </div>
         </div>
-      )}
 
-      {/* Guest user */}
-      {!email && guest && (
-        <div className="flex items-center gap-3">
-          <span className="text-white/80">Guest User</span>
+        <nav className="hidden md:flex items-center gap-4 text-sm text-white/80 ml-4">
+          <a href="/#hero" className="hover:text-white transition">
+            Overview
+          </a>
+          <a href="/#platform-roadmap" className="hover:text-white transition">
+            Platform roadmap
+          </a>
+          <a href="/#dashboard" className="hover:text-white transition">
+            Feature list
+          </a>
+          <a href="/feature-request" className="hover:text-white transition">
+            Submit a feature
+          </a>
+        </nav>
+
+        <div className="flex-1" />
+
+        {/* Logged-in user */}
+        {email && (
+          <div className="flex items-center gap-3">
+            <span className="text-white/80">{email}</span>
+            <Button
+              className="bg-transparent border border-white/40 text-white hover:bg-white/10 px-4 py-1"
+              onClick={() => signOut()}
+            >
+              Sign Out
+            </Button>
+          </div>
+        )}
+
+        {/* Guest user */}
+        {!email && guest && (
+          <div className="flex items-center gap-3">
+            <span className="text-white/80">Guest User</span>
+            <Button
+              className="bg-transparent border border-white/40 text-white hover:bg-white/10 px-4 py-1"
+              onClick={logoutGuest}
+            >
+              Exit Guest Mode
+            </Button>
+          </div>
+        )}
+
+        {/* Not logged in */}
+        {!email && !guest && (
           <Button
-            className="bg-transparent border border-white/40 text-white hover:bg-white/10 px-4 py-1"
-            onClick={logoutGuest}
+            className="bg-amber-600 text-black hover:bg-amber-500 px-4 py-1"
+            onClick={() => signIn()}
           >
-            Exit Guest Mode
+            Sign In
           </Button>
-        </div>
-      )}
-
-      {/* Not logged in */}
-      {!email && !guest && (
-        <Button
-          className="bg-amber-600 text-black hover:bg-amber-500 px-4 py-1"
-          onClick={() => signIn()}
-        >
-          Sign In
-        </Button>
-      )}
+        )}
+      </div>
     </header>
   );
 }
