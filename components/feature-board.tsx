@@ -174,9 +174,6 @@ export function FeatureBoard() {
           </div>
 
           <div className="relative overflow-hidden">
-            <div className="absolute inset-x-0 bottom-5 h-px bg-white/10" />
-            <div className="absolute inset-x-0 bottom-5 h-8 bg-white/5 border-y border-white/10" />
-
             <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-4 relative">
               {roadmap.map((item) => {
                 const colors = roadmapColors[item.status];
