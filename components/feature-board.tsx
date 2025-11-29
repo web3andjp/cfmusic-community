@@ -187,8 +187,11 @@ export function FeatureBoard() {
                     >
                       {item.status}
                     </div>
+                    {item.eta && (
+                      <p className="text-xs text-white/70 font-semibold">ETA: {item.eta}</p>
+                    )}
                     <div className="flex flex-col items-center gap-2">
-                      <div className={`w-px flex-1 min-h-[76px] ${colors.stem}`} />
+                      <div className={`w-px flex-1 min-h-[64px] ${colors.stem}`} />
                       <div className={`w-3 h-3 rounded-full ${colors.dot}`} />
                     </div>
                     <div className="space-y-1">
@@ -199,11 +202,6 @@ export function FeatureBoard() {
                         <span>{item.title}</span>
                       </h3>
                       <p className={`text-sm ${colors.label}`}>{item.description}</p>
-                      {item.eta && (
-                        <p className="text-xs text-white/60">
-                          <span className="font-semibold">ETA:</span> {item.eta}
-                        </p>
-                      )}
                     </div>
                   </div>
                 );
