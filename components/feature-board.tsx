@@ -143,6 +143,43 @@ export function FeatureBoard() {
         </p>
       </section>
 
+      {/* Roadmap */}
+      <div className="border border-white/10 rounded-xl bg-white/5 p-5 shadow-lg">
+        <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-white/60">Product Roadmap</p>
+            <h2 className="text-xl font-semibold mt-1">Follow the build from idea to shipped</h2>
+          </div>
+          <span className="text-sm text-white/70">Updated weekly</span>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {roadmap.map((item) => (
+            <div
+              key={item.title}
+              className="border border-white/10 rounded-lg bg-black/30 p-4 flex flex-col gap-2 hover:border-amber-400/40 transition"
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="font-semibold">{item.title}</h3>
+                <span
+                  className={`text-xs px-2 py-1 rounded-full uppercase tracking-wide ${
+                    item.status === "shipped"
+                      ? "bg-emerald-500/20 text-emerald-200 border border-emerald-500/40"
+                      : item.status === "building"
+                      ? "bg-amber-500/20 text-amber-100 border border-amber-400/50"
+                      : "bg-white/10 text-white/70 border border-white/20"
+                  }`}
+                >
+                  {item.status}
+                </span>
+              </div>
+              <p className="text-white/70 text-sm">{item.description}</p>
+              {item.eta && <p className="text-xs text-white/50">ETA: {item.eta}</p>}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Submit Feature */}
       <div className="p-5 border border-white/10 rounded-xl bg-white/5 shadow-lg" id="dashboard">
         <div className="flex items-center justify-between flex-wrap gap-3 mb-3">
@@ -217,43 +254,6 @@ export function FeatureBoard() {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Roadmap */}
-      <div className="border border-white/10 rounded-xl bg-white/5 p-5 shadow-lg">
-        <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-white/60">Product Roadmap</p>
-            <h2 className="text-xl font-semibold mt-1">Follow the build from idea to shipped</h2>
-          </div>
-          <span className="text-sm text-white/70">Updated weekly</span>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-4">
-          {roadmap.map((item) => (
-            <div
-              key={item.title}
-              className="border border-white/10 rounded-lg bg-black/30 p-4 flex flex-col gap-2 hover:border-amber-400/40 transition"
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-semibold">{item.title}</h3>
-                <span
-                  className={`text-xs px-2 py-1 rounded-full uppercase tracking-wide ${
-                    item.status === "shipped"
-                      ? "bg-emerald-500/20 text-emerald-200 border border-emerald-500/40"
-                      : item.status === "building"
-                      ? "bg-amber-500/20 text-amber-100 border border-amber-400/50"
-                      : "bg-white/10 text-white/70 border border-white/20"
-                  }`}
-                >
-                  {item.status}
-                </span>
-              </div>
-              <p className="text-white/70 text-sm">{item.description}</p>
-              {item.eta && <p className="text-xs text-white/50">ETA: {item.eta}</p>}
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
