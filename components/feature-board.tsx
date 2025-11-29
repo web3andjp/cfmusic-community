@@ -154,12 +154,12 @@ export function FeatureBoard() {
 
   return (
     <div className="flex flex-col gap-8 mt-6">
-      {/* Full-width Product Roadmap banner */}
+      {/* Full-width Platform Roadmap banner */}
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-gradient-to-r from-amber-900/80 via-amber-700/70 to-amber-600/60 border-y border-white/10 shadow-2xl">
         <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 py-10 space-y-6">
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-white/70">Product Roadmap</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-white/70">Platform Roadmap</p>
               <h2 className="text-3xl font-semibold mt-1 leading-tight text-white">
                 Where the platform is heading next
               </h2>
@@ -212,7 +212,7 @@ export function FeatureBoard() {
           Vote on what ships next. Shape the future of this non-profit music platform.
         </h1>
         <p className="text-white/80 max-w-3xl">
-          Drop ideas, upvote priorities, and follow along as we move work across the product roadmap.
+          Drop ideas, upvote priorities, and follow along as we move work across the platform roadmap.
           Every vote keeps the platform aligned with listeners and artists in the mission.
         </p>
       </section>
