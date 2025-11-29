@@ -49,7 +49,7 @@ const roadmap: RoadmapItem[] = [
 
 export function FeatureBoard() {
   const { data: session } = useSession();
-   const router = useRouter();
+  const router = useRouter();
 
   const [features, setFeatures] = useState<Feature[]>([]);
   const [loading, setLoading] = useState(true);
@@ -130,20 +130,7 @@ export function FeatureBoard() {
 
   return (
     <div className="flex flex-col gap-8 mt-6">
-      <section className="rounded-2xl border border-white/10 bg-gradient-to-r from-amber-800/40 via-amber-700/30 to-amber-500/25 p-6 shadow-xl">
-        <p className="text-sm uppercase tracking-[0.2em] text-white/70 mb-2">
-          Community roadmap
-        </p>
-        <h1 className="text-3xl md:text-4xl font-semibold leading-tight text-white mb-3">
-          Vote on what ships next. Shape the future of this non-profit music platform.
-        </h1>
-        <p className="text-white/80 max-w-3xl">
-          Drop ideas, upvote priorities, and follow along as we move work across the product roadmap.
-          Every vote keeps the platform aligned with listeners and artists in the mission.
-        </p>
-      </section>
-
-      {/* Roadmap */}
+      {/* Product Roadmap (top of page) */}
       <div className="border border-white/10 rounded-xl bg-white/5 p-5 shadow-lg">
         <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
           <div>
@@ -179,6 +166,19 @@ export function FeatureBoard() {
           ))}
         </div>
       </div>
+
+      <section className="rounded-2xl border border-white/10 bg-gradient-to-r from-amber-800/40 via-amber-700/30 to-amber-500/25 p-6 shadow-xl">
+        <p className="text-sm uppercase tracking-[0.2em] text-white/70 mb-2">
+          Community roadmap
+        </p>
+        <h1 className="text-3xl md:text-4xl font-semibold leading-tight text-white mb-3">
+          Vote on what ships next. Shape the future of this non-profit music platform.
+        </h1>
+        <p className="text-white/80 max-w-3xl">
+          Drop ideas, upvote priorities, and follow along as we move work across the product roadmap.
+          Every vote keeps the platform aligned with listeners and artists in the mission.
+        </p>
+      </section>
 
       {/* Submit Feature */}
       <div className="p-5 border border-white/10 rounded-xl bg-white/5 shadow-lg" id="dashboard">
