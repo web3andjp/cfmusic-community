@@ -240,30 +240,34 @@ export function FeatureBoard() {
 
         {loading && <p className="text-white/60">Loading...</p>}
 
-        {features.map((f) => (
-          <div
-            key={f.id}
-            className="p-4 border border-white/10 rounded-lg bg-white/5 flex justify-between hover:border-amber-400/40 transition"
-          >
-            <div>
-              <h3 className="font-bold text-lg">{f.title}</h3>
-              <p className="text-white/70 text-sm mt-1">{f.description}</p>
-            </div>
+        {features.map((f) => {
+          const disabled = !isLoggedIn;
+          return (
+            <div
+              key={f.id}
+              className="p-4 border border-white/10 rounded-lg bg-white/5 flex justify-between hover:border-amber-400/40 transition"
+            >
+              <div>
+                <h3 className="font-bold text-lg">{f.title}</h3>
+                <p className="text-white/70 text-sm mt-1">{f.description}</p>
+              </div>
 
-            <div className="flex flex-col items-center">
-              <span className="text-lg font-bold mb-1">{f.votes}</span>
+              <div className="flex flex-col items-center">
+                <span className="text-lg font-bold mb-1">{f.votes}</span>
 
-              <Button
-                size="sm"
-                onClick={() => vote(f.id)}
-                disabled={!isLoggedIn}
-                className="bg-amber-600"
-              >
-                Vote
-              </Button>
+                <Button
+                  size="sm"
+                  onClick={() => vote(f.id)}
+                  disabled={disabled}
+                  className="bg-amber-600"
+                  title={disabled ? "You must be logged in to vote." : "Vote for this feature"}
+                >
+                  Vote
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
