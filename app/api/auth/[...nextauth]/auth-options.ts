@@ -1,87 +1,59 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "@/lib/prisma";
-import type { AuthOptions } from "next-auth";
-import EmailProvider from "next-auth/providers/email";
-import CredentialsProvider from "next-auth/providers/credentials";
+// app/api/auth/[...nextauth]/auth-options.ts
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { prisma } from '@/lib/prisma'
+import EmailProvider from 'next-auth/providers/email'
+import CredentialsProvider from 'next-auth/providers/credentials'
 
-export const authOptions: AuthOptions = {
+export const authOptions = {
   adapter: PrismaAdapter(prisma),
-
   providers: [
-    // MAGIC LINK LOGIN
     EmailProvider({
       from: process.env.EMAIL_FROM!,
-      sendVerificationRequest: async ({ identifier, url }) => {
-        const { Resend } = await import("resend");
-        const resend = new Resend(process.env.RESEND_API_KEY!);
-
+      async sendVerificationRequest({ identifier, url }) {
+        const { Resend } = await import('resend')
+        const resend = new Resend(process.env.RESEND_API_KEY!)
         await resend.emails.send({
           from: process.env.EMAIL_FROM!,
           to: identifier,
-          subject: "Your Campfire Login Link",
-          html: `
-            <div style="font-family: sans-serif; font-size: 16px;">
+          subject: 'Your Campfire Login Link',
+          html: `<div style="font-family: sans-serif; font-size: 16px;">
               <p>Click the link below to sign in:</p>
               <p><a href="${url}">Sign in to Campfire</a></p>
-            </div>
-          `,
-        });
+            </div>`,
+        })
       },
     }),
-
-    // GUEST LOGIN (NO PASSWORD REQUIRED)
     CredentialsProvider({
-      name: "Guest Login",
+      name: 'Guest Login',
       credentials: {},
-
       async authorize() {
-        const email = "guest@cfmusic.org";
-
-        let user = await prisma.user.findUnique({
-          where: { email },
-        });
-
-        if (!user) {
-          user = await prisma.user.create({
-            data: {
-              email,
-              name: "Guest User",
-              image: null,
-              registered: false,
-            },
-          });
-        }
-
-        return user;
+        const user = await prisma.user.upsert({
+          where: { email: 'guest@cfmusic.org' },
+          update: {},
+          create: { email: 'guest@cfmusic.org', name: 'Guest User', registered: false },
+        })
+        return user
       },
     }),
   ],
-
-  session: {
-    strategy: "jwt",
-  },
-
-  pages: {
-    signIn: "/auth/signin",
-  },
-
+  session: { strategy: 'jwt' as const },
+  pages: { signIn: '/auth/signin' },
   callbacks: {
-    // Attach data to the JWT
     async jwt({ token, user }) {
       if (user) {
-        token.email = user.email;
-        token.registered = user.registered ?? false;
+        token.email = user.email
+        // cast user to any because registered is not in NextAuth’s base type
+        token.registered = (user as any).registered ?? false
       }
-      return token;
+      return token
     },
-
-    // Expose it in the session
     async session({ session, token }) {
-      if (session.user) {
-        session.user.email = token.email as string;
-        session.user.registered = token.registered as boolean;
+      session.user = {
+        ...session.user,
+        email: token.email as string,
+        registered: token.registered as boolean,
       }
-      return session;
+      return session
     },
   },
-};
+}
