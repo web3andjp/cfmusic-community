@@ -198,7 +198,7 @@ export function FeatureBoard() {
           </div>
 
           <div className="relative overflow-hidden">
-            <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-4 relative">
+            <div className="flex flex-col items-stretch gap-8 relative">
               {roadmap.map((item) => {
                 const colors = roadmapColors[item.status];
                 return (
