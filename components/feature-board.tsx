@@ -166,9 +166,6 @@ export function FeatureBoard() {
                 building → shipped.
               </p>
             </div>
-            <span className="text-sm text-white/70 bg-black/20 px-3 py-1 rounded-full border border-white/15">
-              Updated weekly
-            </span>
           </div>
 
           <div className="relative overflow-hidden">
