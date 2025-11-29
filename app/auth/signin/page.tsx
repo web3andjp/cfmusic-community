@@ -8,52 +8,53 @@ import { Button } from "@/components/ui/button";
 export default function SignInPage() {
   const [email, setEmail] = useState("");
 
-  const handleSignIn = () => {
+  const handleMagicLink = () => {
     if (!email) return;
     signIn("email", { email });
   };
 
   const handleGuest = () => {
-    const guestId = crypto.randomUUID();
-    localStorage.setItem(
-      "campfire-guest",
-      JSON.stringify({ guestId, createdAt: Date.now() })
-    );
-    window.location.href = "/";
+    signIn("credentials", {
+      email: "guest@cfmusic.org",
+      redirect: true,
+    });
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-[80vh] gap-6 px-4 text-white">
-      
-      <h1 className="text-3xl font-bold">Sign In</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#0A0A0A] px-6">
+      <div className="w-full max-w-md text-center space-y-6">
+        <h1 className="text-4xl font-bold text-white">Sign In</h1>
 
-      {/* Email Input */}
-      <Input
-        type="email"
-        placeholder="Enter your email"
-        className="max-w-sm w-full bg-white text-black placeholder:text-gray-600"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <Input
+          type="email"
+          placeholder="Enter your email"
+          className="w-full"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      {/* Magic Link Button */}
-      <Button
-        className="max-w-sm w-full bg-amber-600 text-black font-semibold hover:bg-amber-500"
-        onClick={handleSignIn}
-      >
-        Send Magic Link
-      </Button>
+        <Button
+          className="w-full bg-campfire-amber hover:bg-campfire-amber/90 text-black font-semibold py-3 rounded-lg"
+          onClick={handleMagicLink}
+        >
+          Send Magic Link
+        </Button>
 
-      <div className="text-white/60 text-sm">or</div>
+        <div className="text-white/50 text-sm">or</div>
 
-      {/* Guest Mode Button */}
-      <Button
-        variant="outline"
-        className="max-w-sm w-full border-white/40 text-white hover:bg-white/10"
-        onClick={handleGuest}
-      >
-        Continue as Guest
-      </Button>
+        <Button
+          onClick={handleGuest}
+          className="
+            w-full py-3 rounded-lg font-semibold
+            bg-white/10 text-white 
+            border border-white/20
+            hover:bg-white/20
+            transition
+          "
+        >
+          Continue as Guest
+        </Button>
+      </div>
     </div>
   );
 }
