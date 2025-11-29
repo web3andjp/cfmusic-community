@@ -47,27 +47,24 @@ const roadmapColors: Record<
 
 const roadmap: RoadmapItem[] = [
   {
-    title: "Mobile-first listening",
-    description: "Stream the catalog with lightweight offline caching and low-data modes.",
+    title: "🚀 Beta Platform Launch",
+    description:
+      "Core listening, adaptive streaming, lightweight offline caching, early discovery, and feedback loops.",
     status: "building",
     eta: "March",
   },
   {
-    title: "Donor-friendly playback links",
-    description: "Shareable listening links that surface project impact and donation calls-to-action.",
+    title: "🎶 Community Playlists",
+    description:
+      "Curated around events, regions, moods, and causes with follow/save and playlist metadata.",
     status: "planned",
     eta: "Q2",
   },
   {
-    title: "Community playlists",
-    description: "Curated playlists for events, regions, and causes with simple follow and save.",
+    title: "Upcoming Items",
+    description: "More roadmap items coming soon as we grow the platform with community input.",
     status: "planned",
-  },
-  {
-    title: "Accessible audio player",
-    description: "Keyboard-first controls, captions/lyrics, and high-contrast theme baked into the player.",
-    status: "shipped",
-    eta: "Live",
+    eta: "Rolling",
   },
 ];
 
@@ -161,11 +158,12 @@ export function FeatureBoard() {
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-white/70">Platform Roadmap</p>
               <h2 className="text-3xl font-semibold mt-1 leading-tight text-white">
-                Where the platform is heading next
+                Where Campfire Music is heading next
               </h2>
               <p className="text-white/80 mt-2 max-w-3xl">
-                Track the key bets for this non-profit streaming platform. Vote, comment, and watch
-                features move from planned to shipped.
+                A transparent look at the core initiatives shaping our nonprofit, artist-first streaming
+                platform. Follow progress, vote on priorities, and watch features move from planned →
+                building → shipped.
               </p>
             </div>
             <span className="text-sm text-white/70 bg-black/20 px-3 py-1 rounded-full border border-white/15">
@@ -194,7 +192,11 @@ export function FeatureBoard() {
                     <div className="space-y-1">
                       <h3 className="font-semibold text-lg text-white">{item.title}</h3>
                       <p className={`text-sm ${colors.label}`}>{item.description}</p>
-                      {item.eta && <p className="text-xs text-white/60">ETA: {item.eta}</p>}
+                      {item.eta && (
+                        <p className="text-xs text-white/60">
+                          <span className="font-semibold">ETA:</span> {item.eta}
+                        </p>
+                      )}
                     </div>
                   </div>
                 );
