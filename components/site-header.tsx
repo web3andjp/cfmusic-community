@@ -2,6 +2,7 @@
 
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
@@ -45,7 +46,14 @@ export function SiteHeader() {
     <header className="border-b border-white/10">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-6">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-amber-500/80 border border-white/20" />
+          <Image
+            src="/campfire-logo.png"
+            alt="Campfire Music logo"
+            width={32}
+            height={32}
+            className="w-8 h-8 rounded-full"
+            priority
+          />
           <div className="flex flex-col leading-tight">
             <span className="text-xs uppercase tracking-[0.2em] text-white/60">
               Campfire Music
