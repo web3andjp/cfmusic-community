@@ -102,7 +102,7 @@ export function FeatureBoard() {
                 return (
                   <div
                     key={item.title}
-                    className="flex-1 flex flex-col items-center text-center gap-3 pt-2"
+                    className="flex-1 flex flex-col items-start text-left gap-3 pt-2 max-w-xs md:max-w-sm"
                   >
                     <div
                       className={`w-20 h-20 rounded-full border-2 flex items-center justify-center text-sm font-semibold uppercase tracking-wide relative ${colors.ring}`}
@@ -116,15 +116,15 @@ export function FeatureBoard() {
                       <div className={`w-px flex-1 min-h-[64px] ${colors.stem}`} />
                       <div className={`w-3 h-3 rounded-full ${colors.dot}`} />
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="font-semibold text-lg text-white flex items-center justify-center gap-2">
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-lg text-white flex items-center justify-start gap-2">
                         <span className="inline-flex items-center justify-center rounded-md bg-white/10 border border-white/15 px-2 py-1 text-sm">
                           {item.icon}
                         </span>
                         <span>{item.title}</span>
                       </h3>
                       <p
-                        className={`text-sm ${colors.label} leading-relaxed max-w-xs mx-auto text-center`}
+                        className={`text-sm ${colors.label} leading-relaxed max-w-md text-left`}
                       >
                         {item.description}
                       </p>
