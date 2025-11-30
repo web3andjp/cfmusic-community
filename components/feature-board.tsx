@@ -75,7 +75,7 @@ export function FeatureBoard() {
             <h2 className="text-2xl md:text-3xl font-semibold text-white">
               The Future of Music Starts Here
             </h2>
-            <p className="text-base md:text-lg text-white/90 leading-relaxed max-w-3xl">
+            <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-3xl">
               Campfire is redefining streaming as a community-powered public good — a place where
               artists thrive, fans belong, and everyone participates in a fairer music ecosystem.
             </p>
@@ -87,7 +87,7 @@ export function FeatureBoard() {
               <h2 className="text-2xl md:text-3xl font-semibold mt-1 leading-tight text-white">
                 Where Campfire Music is heading next
               </h2>
-              <p className="text-white/80 mt-2 max-w-3xl text-base md:text-lg">
+              <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-3xl mt-2">
                 A transparent look at the core initiatives shaping our nonprofit, artist-first streaming
                 platform. Follow progress, vote on priorities, and watch features move from planned →
                 building → shipped.
@@ -123,7 +123,9 @@ export function FeatureBoard() {
                         </span>
                         <span>{item.title}</span>
                       </h3>
-                      <p className={`text-sm ${colors.label}`}>{item.description}</p>
+                      <p className={`text-sm ${colors.label} text-center`}>
+                        {item.description}
+                      </p>
                     </div>
                   </div>
                 );
@@ -142,7 +144,7 @@ export function FeatureBoard() {
           <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-3xl">
             Shape the future of this non-profit music platform.
           </p>
-          <p className="text-base md:text-lg text-white/90 leading-relaxed max-w-3xl">
+          <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-3xl">
             Drop ideas, upvote priorities, and follow along as we move work across the platform
             roadmap. Every vote keeps the platform aligned with listeners and artists in the mission.
           </p>

@@ -154,7 +154,7 @@ function FeatureRequestForm() {
 
       <div>
         <h2 className="text-2xl md:text-3xl font-semibold text-white mt-2">Suggest a Feature</h2>
-        <p className="text-white/80 mt-2 text-base md:text-lg">
+        <p className="text-base md:text-lg text-white/80 leading-relaxed">
           Help us improve Campfire by proposing new features or enhancements. Your ideas guide the
           roadmap and shape the platform.
         </p>
