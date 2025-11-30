@@ -42,7 +42,7 @@ export function SiteHeader() {
   const email = session?.user?.email;
 
   return (
-    <header className="border-b border-white/10">
+    <header className="border-b border-white/10 bg-gradient-to-r from-amber-900/80 via-amber-700/60 to-amber-600/50">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-6">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-amber-500/80 border border-white/20" />
