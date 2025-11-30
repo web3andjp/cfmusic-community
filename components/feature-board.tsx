@@ -123,7 +123,9 @@ export function FeatureBoard() {
                         </span>
                         <span>{item.title}</span>
                       </h3>
-                      <p className={`text-sm ${colors.label} text-center`}>
+                      <p
+                        className={`text-sm ${colors.label} leading-relaxed max-w-xs mx-auto text-center`}
+                      >
                         {item.description}
                       </p>
                     </div>
