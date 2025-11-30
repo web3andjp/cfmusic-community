@@ -133,15 +133,6 @@ export function FeatureBoard() {
         </div>
       </section>
 
-      <div className="flex justify-center">
-        <a
-          href="/auth/signin"
-          className="inline-flex items-center justify-center rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-amber-500"
-        >
-          Register / Sign In
-        </a>
-      </div>
-
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen rounded-2xl border border-white/10 bg-gradient-to-r from-amber-800/40 via-amber-700/30 to-amber-500/25 p-6 shadow-xl">
         <p className="text-sm uppercase tracking-[0.2em] text-white/70 mb-2">
           Community roadmap
@@ -153,7 +144,7 @@ export function FeatureBoard() {
           Drop ideas, upvote priorities, and follow along as we move work across the platform roadmap.
           Every vote keeps the platform aligned with listeners and artists in the mission.
         </p>
-        <div className="mt-4 flex">
+        <div className="mt-4 flex justify-center md:justify-start">
           <a
             href="/auth/signin"
             className="inline-flex items-center justify-center rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-amber-500"
