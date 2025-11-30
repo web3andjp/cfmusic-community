@@ -141,7 +141,7 @@ export function FeatureBoard() {
         <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 py-8 space-y-3">
           <p className="text-sm uppercase tracking-[0.2em] text-white/70">Community roadmap</p>
           <h2 className="text-2xl md:text-3xl font-semibold text-white">
-            Vote on what ships next.
+            Vote on what feature gets built next.
           </h2>
           <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-3xl">
             Shape the future of this non-profit music platform.
