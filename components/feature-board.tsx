@@ -153,6 +153,14 @@ export function FeatureBoard() {
           Drop ideas, upvote priorities, and follow along as we move work across the platform roadmap.
           Every vote keeps the platform aligned with listeners and artists in the mission.
         </p>
+        <div className="mt-4 flex">
+          <a
+            href="/auth/signin"
+            className="inline-flex items-center justify-center rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-amber-500"
+          >
+            Register / Sign In
+          </a>
+        </div>
       </section>
 
     </div>
