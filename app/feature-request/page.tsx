@@ -111,7 +111,7 @@ function FeatureRequestForm() {
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-white/60">Feature Requests</p>
-            <h2 className="text-3xl md:text-4xl font-semibold leading-tight text-white mt-1">
+            <h2 className="text-2xl md:text-3xl font-semibold leading-tight text-white mt-1">
               Help us improve Campfire by suggesting features and enhancements.
             </h2>
           </div>
@@ -153,8 +153,8 @@ function FeatureRequestForm() {
       </div>
 
       <div>
-        <h2 className="text-3xl font-semibold text-white mt-2">Suggest a Feature</h2>
-        <p className="text-white/80 mt-2">
+        <h2 className="text-2xl md:text-3xl font-semibold text-white mt-2">Suggest a Feature</h2>
+        <p className="text-white/80 mt-2 text-base md:text-lg">
           Help us improve Campfire by proposing new features or enhancements. Your ideas guide the
           roadmap and shape the platform.
         </p>
