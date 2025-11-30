@@ -133,24 +133,26 @@ export function FeatureBoard() {
         </div>
       </section>
 
-      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen rounded-2xl border border-white/10 bg-gradient-to-r from-amber-800/40 via-amber-700/30 to-amber-500/25 p-6 shadow-xl">
-        <p className="text-sm uppercase tracking-[0.2em] text-white/70 mb-2">
-          Community roadmap
-        </p>
-        <h1 className="text-3xl md:text-4xl font-semibold leading-tight text-white mb-3">
-          Vote on what ships next. Shape the future of this non-profit music platform.
-        </h1>
-        <p className="text-white/80 max-w-3xl">
-          Drop ideas, upvote priorities, and follow along as we move work across the platform roadmap.
-          Every vote keeps the platform aligned with listeners and artists in the mission.
-        </p>
-        <div className="mt-4 flex justify-center md:justify-start">
-          <a
-            href="/auth/signin"
-            className="inline-flex items-center justify-center rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-amber-500"
-          >
-            Register / Sign In
-          </a>
+      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen border border-white/10 bg-gradient-to-r from-amber-800/40 via-amber-700/30 to-amber-500/25 shadow-xl">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 py-8">
+          <p className="text-sm uppercase tracking-[0.2em] text-white/70 mb-2 text-center">
+            Community roadmap
+          </p>
+          <h1 className="text-3xl md:text-4xl font-semibold leading-tight text-white mb-3 text-center">
+            Vote on what ships next. Shape the future of this non-profit music platform.
+          </h1>
+          <p className="text-white/80 max-w-3xl text-center mx-auto">
+            Drop ideas, upvote priorities, and follow along as we move work across the platform
+            roadmap. Every vote keeps the platform aligned with listeners and artists in the mission.
+          </p>
+          <div className="mt-4 flex justify-center">
+            <a
+              href="/auth/signin"
+              className="inline-flex items-center justify-center rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-amber-500"
+            >
+              Register / Sign In
+            </a>
+          </div>
         </div>
       </section>
 
