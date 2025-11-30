@@ -133,18 +133,12 @@ export function FeatureBoard() {
         </div>
       </section>
 
-      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="flex justify-center">
         <a
-          href="#"
+          href="/auth/signin"
           className="inline-flex items-center justify-center rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-amber-500"
         >
-          Register / Sign Up
-        </a>
-        <a
-          href="#"
-          className="inline-flex items-center justify-center rounded-md border border-white/30 px-4 py-2 text-sm font-semibold text-white/90 transition hover:border-white/60 hover:text-white"
-        >
-          Support the Movement
+          Register / Sign In
         </a>
       </div>
 
